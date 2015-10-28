@@ -1,0 +1,8 @@
+chrome | google-chrome
+konsole | gnome-terminal
+sound | gnome-control-center sound
+settings | gnome-control-center
+lock | i3lock -c 000000 -i Desktop/bg.png -t
+suspend | i3lock -c 000000 -i Desktop/bg.png -t && sudo /bin/systemctl suspend
+reboot | sudo reboot
+
