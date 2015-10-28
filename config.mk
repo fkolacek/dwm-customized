@@ -2,11 +2,13 @@
 VERSION = 6.1
 
 # Customize below to fit your system
+WEB_BROWSER = google-chrome
 
 # paths
 PREFIX = /usr/local
 XSESSIONS = /usr/share/xsessions
 MANPREFIX = ${PREFIX}/share/man
+SYSTEMD_SERVICES = /etc/systemd/user
 
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib

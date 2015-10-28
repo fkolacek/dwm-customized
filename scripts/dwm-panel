@@ -64,7 +64,7 @@ function main(){
 
     BUFFER=$(echo "$BUFFER" | sed -r "s/^ *\\$SEPARATOR //")
 
-    xsetroot -name "$BUFFER"
+    xsetroot -display :0 -name "$BUFFER"
     sleep 1
   done
 

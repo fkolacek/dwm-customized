@@ -1,8 +1,11 @@
 [Unit]
 Description=DWM panel deamon
+After=graphical.target
 
 [Service]
 Type=simple
 #PIDFile=/var/run/dwm-panel.pid
 ExecStart=/usr/local/bin/dwm-panel
 
+[Install]
+WantedBy=default.target

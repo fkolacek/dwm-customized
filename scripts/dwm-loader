@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DWM_BINARY="/usr/local/bin/dwm"
+DWM_BINARY="DWM_BINARY_FROM_CONFIG"
 
 # Set black background
 xsetroot -solid black
