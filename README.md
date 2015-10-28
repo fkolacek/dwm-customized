@@ -9,6 +9,8 @@ I was happily using dwm fork created by [bblaskovic](https://github.com/blaskovi
 List of applied patches:
 - pertag
 - systray
+- nametag
+- cfacts
 
 Requirements:
 - libX11, libXft and libXinerama headers
