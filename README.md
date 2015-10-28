@@ -11,6 +11,7 @@ List of applied patches:
 - systray
 - nametag
 - cfacts
+- multimon (monitor marker)
 
 Requirements:
 - libX11, libXft and libXinerama headers
