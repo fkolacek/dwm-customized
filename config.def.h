@@ -73,13 +73,13 @@ static const char *cmdkilldwm[]  = { "killall", "dwm", NULL };
 static const char *cmddwmmenu[]  = { "dwm-menu", NULL };
 static const char *cmdscreenshot[]  = { "gnome-screenshot", NULL, NULL };
 static const char *cmdKB[]  = { "dwm-switch-keyboard", NULL, NULL };
+static const char *cmdopenbrowser[]  = { "dwm-open-browser", NULL };
 
 static const char *cmdsoundup[]  = { "amixer", "-q", "sset", "Master", "5%+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "-q", "sset", "Master", "5%-", NULL };
 static const char *cmdsoundtoggle[]  = { "amixer", "-q", "sset", "Master", "toggle", NULL };
 
 /* Scripts */
-static const char *cmdopenbrowser[]  = { "dwm-open-browser", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */

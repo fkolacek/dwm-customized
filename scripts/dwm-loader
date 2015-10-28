@@ -1,8 +1,6 @@
 #!/bin/bash
 
-declare -r DWM_BINARY="/usr/local/bin/dwm"
-declare -r DWM_LOADER=$(readlink -f $0)
-declare -r DWM_LOADER_NAME=$(basename $DWM_LOADER)
+DWM_BINARY="/usr/local/bin/dwm"
 
 # Set black background
 xsetroot -solid black
@@ -17,7 +15,11 @@ wmname LG3D
 test -e ~/.dwm-start && ~/.dwm-start &
 
 while true; do
-  $DWM_BINARY || exit;
+  $DWM_BINARY >/dev/null 2>&1
+
+  if [[ $? -ne 129 ]]; then
+    break
+  fi
 done
 
 exit 0
