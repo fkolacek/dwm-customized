@@ -58,8 +58,10 @@ install: all
 	@echo "Installing 'dwm-open-browser' to ${PREFIX}/bin/dwm-open-browser"
 	@sed "s/WEB_BROWSER_FROM_CONFIG/${WEB_BROWSER}/g" < scripts/dwm-open-browser > ${DESTDIR}${PREFIX}/bin/dwm-open-browser
 	@cp -f scripts/dwm-switch-keyboard ${DESTDIR}${PREFIX}/bin/dwm-switch-keyboard
+	@cp -f scripts/dwm-menu ${DESTDIR}${PREFIX}/bin/dwm-menu
 	@chmod +x ${DESTDIR}${PREFIX}/bin/dwm-open-browser
 	@chmod +x ${DESTDIR}${PREFIX}/bin/dwm-switch-keyboard
+	@chmod +x ${DESTDIR}${PREFIX}/bin/dwm-menu
 
 uninstall:
 	@echo "Warning! This script is not reliable - does NOT remove all files."
@@ -72,6 +74,7 @@ uninstall:
 	@rm -f ${DESTDIR}${PREFIX}/bin/dwm-open-browser
 	@rm -f ${DESTDIR}${PREFIX}/bin/dwm-switch-keyboard
 	@rm -f ${DESTDIR}${PREFIX}/bin/dwm-panel
+	@rm -f ${DESTDIR}${PREFIX}/bin/dwm-menu
 	@rm -f ${DESTDIR}${XSESSIONS}/dwm.desktop
 	@rm -f ${DESTDIR}${XSESSIONS}/dwm.desktop
 
