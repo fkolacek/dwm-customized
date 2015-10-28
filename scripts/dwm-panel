@@ -1,0 +1,72 @@
+#!/bin/bash
+
+declare -r SEPARATOR='|'
+declare -a FEATURES=(Hostname Lang RAM Load Network Volume Battery Time Date)
+declare ENABLED=1
+
+function getHostname(){
+  hostname -s
+}
+function getLang(){
+  setxkbmap -query | grep ^layout |awk '{print $2}' | sed 's/ //g'
+}
+function getRAM(){
+  echo "RAM: $(free -m | grep Mem | awk '{print ($3+$5)"M"}')"
+}
+function getLoad(){
+  echo "L: none"
+}
+function getNetwork(){
+  INTERFACE=$(ip route | grep default | sed -r 's/.+dev ([^\ ]+) .+/\1/g')
+
+  if [ "$INTERFACE" != "" ]; then
+    echo "N: "$(ip addr show $INTERFACE | grep 'inet ' | sed -r 's/^.+inet ([0-9\.\/]+).+$/\1/g')
+  else
+    echo "N: Disconnected"
+  fi
+}
+function getVolume(){
+  echo "V: $(amixer get Master | grep "%" | sed  "s/.*\[\([0-9]\{0,3\}\)%\].*\[on\].*/\1%/g" | sed "s/.*\[off\].*/mute/g" | tail -n 1)"
+}
+function getBattery(){
+  echo "B: none"
+}
+function getDate(){
+  date +%d.%m.%Y
+}
+function getTime(){
+  date +%H:%M:%S
+}
+
+function terminate(){
+  ENABLED=0
+}
+
+function main(){
+  while [[ $ENABLED -eq 1 ]]; do
+    BUFFER=""
+
+    for FEATURE in "${FEATURES[@]}"
+    do
+      func="get${FEATURE}"
+
+      # Check if corresponding function exists
+      if [ -n "$(type -t ${func})" ] && [ "$(type -t ${func})" = function ]; then
+        BUFFER="$BUFFER ${SEPARATOR} $(${func})"
+      fi
+    done
+    BUFFER=$(echo "$BUFFER" | sed -r "s/^ *\\$SEPARATOR //")
+
+    xsetroot -name "$BUFFER"
+    sleep 1
+  done
+
+  return 0
+}
+
+trap terminate SIGTERM;
+trap terminate SIGINT;
+
+main $@;
+
+exit $?;

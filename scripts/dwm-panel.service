@@ -1,0 +1,8 @@
+[Unit]
+Description=DWM panel deamon
+
+[Service]
+Type=simple
+#PIDFile=/var/run/dwm-panel.pid
+ExecStart=/usr/local/bin/dwm-panel
+
