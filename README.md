@@ -6,21 +6,26 @@ dwm is an extremely fast, small, and dynamic window manager for X. See the origi
 
 I was happily using dwm fork created by [bblaskovic](https://github.com/blaskovic/dwm) but then I took an arrow to the knee and decided to create my own. I patched the Vanilla dwm and configured it for my needs.
 
-List of applied patches:
+### List of applied patches:
 - pertag
 - systray
 - nametag
 - cfacts
 - multimon (monitor marker)
 
-Requirements:
+### Requirements:
 - libX11, libXft and libXinerama headers
 
-Installation:
+### Recommended packages:
+ - dmenu, terminus-fonts, xsel, i3lock, wmname
+
+### Installation:
 ```
 # dnf groupinstall 'Development Tools'
-# dnf install libX11-devel libXft-devel libXinerama-devel wmname
+# dnf install libX11-devel libXft-devel libXinerama-devel
+# dnf install dmenu terminus-fonts xsel i3lock wmname
 $ make clean
+$ make
 # make install
 ```
 
