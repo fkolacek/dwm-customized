@@ -31,13 +31,13 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
+	/*{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },*/
 };
 
 /* layout(s) */
 static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster      = 1;    /* number of clients in master area */
-static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
+static const Bool resizehints = False; /* (empty gaps) True means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -49,23 +49,57 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ ControlMask|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+
+#define KEY_SOUND_UP 0x1008ff13
+#define KEY_SOUND_DOWN 0x1008ff11
+#define KEY_SOUND_TOGGLE 0x1008ff12
+#define KEY_PRINT 0xff61
+#define KEY_WIN 0xffeb
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, "-l", "10", NULL };
+static const char *termcmd[]  = { "gnome-terminal", NULL };
+static const char *browsercmd[]  = { "google-chrome", NULL };
+static const char *filemanagercmd[]  = { "gnome-terminal", "-e", "ranger", NULL };
+static const char *cmdkilldwm[]  = { "killall", "dwm", NULL };
+static const char *cmddwmmenu[]  = { "dwm-menu", NULL };
+static const char *cmdscreenshot[]  = { "gnome-screenshot", NULL, NULL };
+static const char *cmdKB[]  = { "dwm-switch-keyboard", NULL, NULL };
+
+static const char *cmdsoundup[]  = { "amixer", "-q", "sset", "Master", "5%+", NULL };
+static const char *cmdsounddown[]  = { "amixer", "-q", "sset", "Master", "5%-", NULL };
+static const char *cmdsoundtoggle[]  = { "amixer", "-q", "sset", "Master", "toggle", NULL };
+
+/* Scripts */
+static const char *cmdopenbrowser[]  = { "dwm-open-browser", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ 0,             KEY_PRINT, spawn,          {.v = termcmd } },
+	{ 0,             KEY_WIN, spawn,          {.v = browsercmd } },
+	{ MODKEY,             KEY_PRINT,      spawn,          {.v = filemanagercmd} },
+	{ MODKEY,             XK_c,      spawn,          {.v = cmdopenbrowser } },
+	{ MODKEY|ShiftMask,   XK_m,      spawn,          {.v = cmddwmmenu } },
+	{ MODKEY,   XK_q,      spawn,          {.v = cmdKB } },
+	{ MODKEY|ShiftMask,   XK_s,      spawn,          {.v = cmdscreenshot } },
+	/* Sound */
+	{ MODKEY,                            XK_Up,     spawn,         {.v = cmdsoundup } },
+	//{ 0,                            KEY_SOUND_UP,     spawn,         {.v = cmdsoundup } },
+	{ MODKEY,                            XK_Down,   spawn,         {.v = cmdsounddown } },
+	//{ 0,                            KEY_SOUND_DOWN,   spawn,         {.v = cmdsounddown } },
+	{ 0,                            KEY_SOUND_TOGGLE, spawn,         {.v = cmdsoundtoggle } },
+	/* Killing dwm */
+	{ MODKEY|ShiftMask,             XK_q,      spawn,           {.v = cmdkilldwm} },
+
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -100,7 +134,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+  // Restart thanks to dwm-loader
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
 };
 
 /* button definitions */
@@ -112,6 +147,10 @@ static Button buttons[] = {
 	{ ClkMonNum,            0,              Button1,        focusmon,       {.i = +1} },
 	{ ClkMonNum,            0,              Button3,        focusmon,       {.i = -1} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+    // kill window
+	{ ClkWinTitle,          0,              Button3,        killclient,     {0} },
+    // dmenu
+	{ ClkWinTitle,          0,              Button1,        spawn,          {.v = dmenucmd} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
