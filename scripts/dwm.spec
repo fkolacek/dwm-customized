@@ -23,7 +23,7 @@ rm -rf %{buildroot}
 
 %build
 make
-
+make scripts
 
 %install
 #make install

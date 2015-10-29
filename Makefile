@@ -28,6 +28,10 @@ clean:
 	@echo cleaning
 	@rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz *.orig *.rej
 
+scripts:
+	@sed -i "s#DWM_BINARY_FROM_CONFIG#${DESTDIR}${PREFIX}/bin/dwm#g" scripts/dwm-loader
+	@sed -i "s/WEB_BROWSER_FROM_CONFIG/${WEB_BROWSER}/g" scripts/dwm-open-browser
+
 install: all
 	@echo
 	@echo ":: [ DWM core ] ::"
