@@ -82,4 +82,4 @@ uninstall:
 	@rm -f ${DESTDIR}${XSESSIONS}/dwm.desktop
 	@rm -f ${DESTDIR}${XSESSIONS}/dwm.desktop
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all options clean scripts dist install uninstall
