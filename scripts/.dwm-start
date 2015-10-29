@@ -6,3 +6,5 @@ xset s off
 xset -dpms
 
 nm-applet &
+
+hash twmnd 2>/dev/null && twmnd &
