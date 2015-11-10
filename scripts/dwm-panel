@@ -17,10 +17,10 @@ function getLoad(){
   echo "L: $(cat /proc/loadavg  | awk '{print $1}')"
 }
 function getNetwork(){
-  INTERFACE=$(ip route | grep default | sed -r 's/.+dev ([^\ ]+) .+/\1/g')
+  INTERFACE=$(ip route | grep default | sed -r 's/.+dev ([^\ ]+) .+/\1/g' | head -n 1)
 
   if [ "$INTERFACE" != "" ]; then
-    echo "N: "$(ip addr show $INTERFACE | grep 'inet ' | sed -r 's/^.+inet ([0-9\.\/]+).+$/\1/g')
+    echo "N: "$(ip addr show $INTERFACE | grep 'inet ' | sed -r 's/^.+inet ([0-9\.\/]+).+$/\1/g' | head -n 1)
   else
     echo "N: Disconnected"
   fi
