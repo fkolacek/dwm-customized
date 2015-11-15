@@ -6,15 +6,23 @@ static const char *fonts[] = {
   "-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"
 };
 
-#define NUMCOLORS         6
+#define NUMCOLORS         12
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
   // border   foreground background
-  { "#073642", "#657b83", "#002b36" }, // 1 = normal (grey on black)
-  { "#b58900", "#eee8d5", "#002b36" }, // 2 = selected (white on black)
-  { "#dc322f", "#002b36", "#b58900" }, // 3 = urgent (black on yellow)
-  { "#073642", "#839496", "#073642" }, // 4 = lightgrey on brightblack
-  { "#073642", "#073642", "#002b36" }, // 5 = brightblack on black
-  { "#073642", "#002b36", "#073642" }, // 6 = black on brightblack
+  { "#444444", "#bbbbbb", "#222222" }, // 1 = normal (same as norm below)
+  { "#005577", "#eeeeee", "#005577" }, // 2 = selected (same as sel below)
+
+  { "#dc322f", "#1d1f21", "#f0c674" }, // 3 = urgent (black on yellow)
+  { "#282a2e", "#282a2e", "#1d1f21" }, // 4 = darkgrey on black (for glyphs)
+  { "#282a2e", "#1d1f21", "#282a2e" }, // 5 = black on darkgrey (for glyphs)
+  { "#282a2e", "#cc6666", "#1d1f21" }, // 6 = red on black
+  { "#282a2e", "#b5bd68", "#1d1f21" }, // 7 = green on black
+  { "#282a2e", "#de935f", "#1d1f21" }, // 8 = orange on black
+  { "#282a2e", "#f0c674", "#282a2e" }, // 9 = yellow on darkgrey
+  { "#282a2e", "#81a2be", "#282a2e" }, // A = blue on darkgrey
+  { "#282a2e", "#b294bb", "#282a2e" }, // B = magenta on darkgrey
+  { "#282a2e", "#8abeb7", "#282a2e" }, // C = cyan on darkgrey
+
 };
 
 static const char dmenufont[]       = "monospace:size=10";
