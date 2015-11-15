@@ -2,8 +2,21 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"monospace:size=10"
+  "-*-xbmicons-medium-r-*-*-12-*-*-*-*-*-*-*",
+  "-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"
 };
+
+#define NUMCOLORS         6
+static const char colors[NUMCOLORS][MAXCOLORS][8] = {
+  // border   foreground background
+  { "#073642", "#657b83", "#002b36" }, // 1 = normal (grey on black)
+  { "#b58900", "#eee8d5", "#002b36" }, // 2 = selected (white on black)
+  { "#dc322f", "#002b36", "#b58900" }, // 3 = urgent (black on yellow)
+  { "#073642", "#839496", "#073642" }, // 4 = lightgrey on brightblack
+  { "#073642", "#073642", "#002b36" }, // 5 = brightblack on black
+  { "#073642", "#002b36", "#073642" }, // 6 = black on brightblack
+};
+
 static const char dmenufont[]       = "monospace:size=10";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
