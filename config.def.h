@@ -2,8 +2,7 @@
 
 /* appearance */
 static const char *fonts[] = {
-  "-*-xbmicons-medium-r-*-*-12-*-*-*-*-*-*-*",
-  "-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"
+  "monospace:size=10"
 };
 
 #define NUMCOLORS         12

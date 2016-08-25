@@ -6,7 +6,7 @@ Packager: Frantisek Kolacek <fkolacek@redhat.com>
 Group:    User Interface/Desktops
 License:  MIT
 URL:    http://github.com/fkolacek/dwm-customized
-Source0:  dwm-customized-1.0.tgz
+Source0:      https://github.com/fkolacek/dwm-customized/archive/dwm-customized-%{version}.tar.gz
 
 BuildRequires:  gcc libX11-devel libXinerama-devel libXft-devel make
 Requires: terminus-fonts xorg-x11-xinit dmenu xsel wmname i3lock
@@ -15,10 +15,9 @@ Requires: terminus-fonts xorg-x11-xinit dmenu xsel wmname i3lock
 Custom DWM configuration packed to RPM package.
 
 %prep
-%setup -q
+%setup -q -n dwm-customized-%{name}-%{version}
 
 %clean
-#make clean
 rm -rf %{buildroot}
 
 %build
@@ -26,7 +25,6 @@ make
 make scripts
 
 %install
-#make install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/local/bin
 mkdir -p %{buildroot}/usr/local/share/man/man1
