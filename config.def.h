@@ -94,6 +94,7 @@ static const char *cmddwmmenu[]  = { "dwm-menu", NULL };
 static const char *cmdscreenshot[]  = { "gnome-screenshot", NULL, NULL };
 static const char *cmdKB[]  = { "dwm-switch-keyboard", NULL, NULL };
 static const char *cmdopenbrowser[]  = { "dwm-open-browser", NULL };
+static const char *cmdopenpyvault[]  = { "pyvault-get", NULL };
 
 static const char *cmdsoundup[]  = { "amixer", "-q", "sset", "Master", "5%+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "-q", "sset", "Master", "5%-", NULL };
@@ -108,6 +109,7 @@ static Key keys[] = {
 	{ 0,             KEY_WIN, spawn,          {.v = browsercmd } },
 	{ MODKEY,             KEY_PRINT,      spawn,          {.v = filemanagercmd} },
 	{ MODKEY,             XK_c,      spawn,          {.v = cmdopenbrowser } },
+	{ MODKEY,             XK_o,      spawn,          {.v = cmdopenpyvault } },
 	{ MODKEY|ShiftMask,   XK_m,      spawn,          {.v = cmddwmmenu } },
 	{ MODKEY,   XK_q,      spawn,          {.v = cmdKB } },
 	{ MODKEY|ShiftMask,   XK_s,      spawn,          {.v = cmdscreenshot } },

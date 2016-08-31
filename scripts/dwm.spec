@@ -1,15 +1,15 @@
-Name:   dwm-customized
-Version:  1.0
-Release:  1%{?dist}
-Summary:  Customized DWM packed to RPM
-Packager: Frantisek Kolacek <fkolacek@redhat.com>
-Group:    User Interface/Desktops
-License:  MIT
-URL:    http://github.com/fkolacek/dwm-customized
-Source0:      https://github.com/fkolacek/dwm-customized/archive/dwm-customized-%{version}.tar.gz
-
+%global debug_package %{nil}
+Name:           dwm-customized
+Version:        1.0
+Release:        1%{?dist}
+Summary:        Customized DWM packed to RPM
+Packager:       Frantisek Kolacek <fkolacek@redhat.com>
+Group:          User Interface/Desktops
+License:        MIT
+URL:            http://github.com/fkolacek/dwm-customized
+Source0:        https://github.com/fkolacek/dwm-customized/archive/dwm-customized-%{version}.tar.gz
 BuildRequires:  gcc libX11-devel libXinerama-devel libXft-devel make
-Requires: terminus-fonts xorg-x11-xinit dmenu xsel wmname i3lock
+Requires:       terminus-fonts xorg-x11-xinit dmenu xsel wmname i3lock
 
 %description
 Custom DWM configuration packed to RPM package.
@@ -65,5 +65,5 @@ chmod 755 %{buildroot}/usr/local/bin/dwm-{menu,switch-keyboard,open-browser}
 /usr/local/bin/dwm-open-browser
 
 %changelog
-* Thu Sep 28 2015 Frantisek Kolacek <fkolacek@redhat.com> 1.0-1
+* Sun Aug 21 2016 Frantisek Kolacek <fkolacek@redhat.com> 1.0-1
 --First repack
